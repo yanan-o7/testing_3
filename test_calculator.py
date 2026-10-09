@@ -9,11 +9,19 @@ class TestCalculateCommission:
         (1001, 100.0),
         (20000, 100.0),
         (20001, 400.01),
-        (50000, 700.0),
+        (40000, 600.0),
         (150, 50.0),
-        (11111, 100.0)
+        (11111, 100.0),
     ])
     def test_commission_calculation(self, amount, expected):
+        assert calculate_commission(amount) == expected
+
+    @pytest.mark.parametrize("amount, expected", [
+        (40001, 500.0),
+        (41111, 500.0),
+        (50000, 500.0),
+    ])
+    def test_commission_new_rule(self, amount, expected):
         assert calculate_commission(amount) == expected
 
     #Негативные тесты
